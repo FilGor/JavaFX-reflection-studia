@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <columnConstraints>
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+   </rowConstraints>
+   <children>
+      <AnchorPane prefHeight="600.0" prefWidth="600.0">
+         <children>
+            <Button fx:id="createObjectButton" layoutX="272.0" layoutY="90.0" mnemonicParsing="false" onAction="#createObjectButtonClicked" prefHeight="30.0" prefWidth="130.0" text="Create Object" />
+            <Button fx:id="saveChangesButton" layoutX="402.0" layoutY="90.0" mnemonicParsing="false" onAction="#saveChangesButtonClicked" prefHeight="30.0" prefWidth="130.0" text="Save Changes" />
+            <TextField fx:id="classNameField" layoutX="85.0" layoutY="90.0" />
+            <TextArea fx:id="bottomTextArea" layoutX="25.0" layoutY="386.0" prefHeight="200.0" prefWidth="553.0" />
+            <TextField fx:id="firstParamField" layoutX="85.0" layoutY="150.0" />
+            <TextField fx:id="secondParamField" layoutX="85.0" layoutY="181.0" />
+            <TextField fx:id="thirdParamField" layoutX="85.0" layoutY="212.0" />
+            <TextField fx:id="fourthParamField" layoutX="85.0" layoutY="243.0" />
+            <TextArea fx:id="fifthParamField" layoutX="85.0" layoutY="274.0" prefHeight="68.0" prefWidth="187.0" />
+            <Label fx:id="firstParamLabel" layoutX="320.0" layoutY="155.0" text="Label" />
+            <Label fx:id="secondParamLabel" layoutX="320.0" layoutY="186.0" text="Label" />
+            <Label fx:id="thirdParamLabel" layoutX="320.0" layoutY="217.0" text="Label" />
+            <Label fx:id="fifthParamLabel" layoutX="320.0" layoutY="290.0" text="Label" />
+            <Label fx:id="fourthParamLabel" layoutX="320.0" layoutY="248.0" text="Label" />
+         </children></AnchorPane>
+   </children>
+</GridPane>
