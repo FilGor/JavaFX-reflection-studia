@@ -2,10 +2,7 @@ package sample;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 
 import java.lang.reflect.Constructor;
@@ -26,44 +23,73 @@ public class Controller {
     private TextField classNameField;
 
     @FXML
-    private Pane paneForClassInfo;
+    private Pane paneForLabels;
+
+    @FXML
+    private Pane paneForInputs;
 
     @FXML
     private TextArea bottomTextArea;
 
     //pozycje startowe dynamicznie generowany labeli
-    private int positionYOfLabel = -30;
-    private int positionXOfLabel = 320;
+    private int positionYOfLabelsAndInputs = -30;
 
     Method classMethods[];
+    Object objectOfGivenClass;
 
     @FXML
-    void createObjectButtonClicked(ActionEvent event) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+    void createObjectButtonClicked(ActionEvent event) throws Exception {
+
         Class<?> cl = Class.forName(classNameField.getText()); // tworzenie obiektu reprezentujacego klase
         Constructor<?> cons = cl.getDeclaredConstructor();//wyciagniecie ref obiektu reprezentujacego konstruktor
-        Object objectOfGivenClass = cons.newInstance();
+        objectOfGivenClass = cons.newInstance();
         classMethods = cl.getDeclaredMethods(); // wyciagniecie metod
         Field classFields[] = cl.getDeclaredFields(); //wyciagniecie pól
 
-        Stream.of(classFields) // wygenerowanie nazw pól
+        Stream.of(classFields) // wygenerowanie nazw pól i input textu
                 .map(e->e.getName())
                 .forEach(e-> {
                     Label label = new Label(e);
-                    label.setTranslateX(positionXOfLabel);
-                    label.setTranslateY(positionYOfLabel+=40);
-                    paneForClassInfo.getChildren().add(label);
+                    TextInputControl textInput;
 
+
+                    if(e.matches(".*text.*")){
+                        textInput = new TextArea();
+                        textInput.setMaxSize(200,20);
+                    }else
+                    {
+                        textInput = new TextField();
+                        textInput.setMaxSize(200,20);
+
+                    }
+
+                    label.setTranslateX(0);
+                    label.setTranslateY(positionYOfLabelsAndInputs+=50);
+                    textInput.setTranslateX(0);
+                    textInput.setTranslateY(positionYOfLabelsAndInputs);
+                    paneForLabels.getChildren().add(label);
+                    paneForInputs.getChildren().add(textInput);
                 });
-        /* List <String> namesOfFields = Stream.of(classFields)
-                .map(e->e.getName())
-                .collect(Collectors.toList());
-        */
 
     }
 
     @FXML
     void saveChangesButtonClicked(ActionEvent event) {
 
+        Stream.of(classMethods)
+                .filter(m->m.getName().matches("set.*"))
+                .forEach(m->{
+                    try {
+                        m.invoke(objectOfGivenClass,paneForInputs
+                                .getChildren()
+                                .iterator()
+                                .next().getTe///??
+                        );
+                    } catch (Exception e){
+                        e.printStackTrace();
+                    }
+
+                });
 
     }
 

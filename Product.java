@@ -8,8 +8,9 @@ public class Product implements Serializable {
     private String name;
     private String category;
     private BigDecimal price;
-    private String description;
     private boolean availableness;
+    private String textDescription;
+
 
     public Product() {
     }
@@ -38,12 +39,12 @@ public class Product implements Serializable {
         this.price = price;
     }
 
-    public String getDescription() {
-        return description;
+    public String getTextDescription() {
+        return textDescription;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setTextDescription(String textDescription) {
+        this.textDescription = textDescription;
     }
 
     public boolean isAvailableness() {
