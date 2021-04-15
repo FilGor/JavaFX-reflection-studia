@@ -3,11 +3,11 @@ package sample;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class Product implements Serializable {
+public class Product {
 
     private String name;
     private String category;
-    private BigDecimal price;
+    private int price;
     private boolean availableness;
     private String textDescription;
 
@@ -31,12 +31,12 @@ public class Product implements Serializable {
         this.category = category;
     }
 
-    public BigDecimal getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+    public void setPrice(String price) {
+        this.price = Integer.parseInt(price);
     }
 
     public String getTextDescription() {
@@ -51,7 +51,8 @@ public class Product implements Serializable {
         return availableness;
     }
 
-    public void setAvailableness(boolean availableness) {
-        this.availableness = availableness;
+    public void setAvailableness(String availableness) {
+        this.availableness = availableness.equals("true") | availableness.equals("True");
+
     }
 }
