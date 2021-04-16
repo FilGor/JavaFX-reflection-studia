@@ -7,7 +7,7 @@ public class Product {
 
     private String name;
     private String category;
-    private int price;
+    private Float price;
     private boolean availableness;
     private String textDescription;
 
@@ -31,12 +31,16 @@ public class Product {
         this.category = category;
     }
 
-    public int getPrice() {
+    public Float getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
-        this.price = Integer.parseInt(price);
+    public void setPrice(Float price) {
+        this.price = price;
+    }
+
+    public boolean isAvailableness() {
+        return availableness;
     }
 
     public String getTextDescription() {
@@ -45,10 +49,6 @@ public class Product {
 
     public void setTextDescription(String textDescription) {
         this.textDescription = textDescription;
-    }
-
-    public boolean isAvailableness() {
-        return availableness;
     }
 
     public void setAvailableness(String availableness) {

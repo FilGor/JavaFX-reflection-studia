@@ -8,13 +8,10 @@ import javafx.scene.layout.Pane;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.stream.Collector;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.*;
 import java.util.stream.Stream;
 
 public class Controller {
@@ -90,7 +87,18 @@ public class Controller {
                     try {
                         TextInputControl actualtextField;
                         actualtextField = (TextInputControl)textInputsIterator.next();
-                        m.invoke(objectOfGivenClass,actualtextField.getText());
+                        String actualType = m.getParameters()[0].getType().getName();
+                        if(isNumericType(actualType)){
+                            try {
+                                Float number =Float.parseFloat(actualtextField.getText());
+                                m.invoke(objectOfGivenClass,number);
+                            }catch (NumberFormatException e){
+                                Alert alert = new Alert(Alert.AlertType.WARNING,e.getMessage());
+                                alert.show();
+                            }
+
+                        }else{
+                        m.invoke(objectOfGivenClass,actualtextField.getText());}
                     } catch (Exception e){
                         e.printStackTrace();
                     }
@@ -108,11 +116,21 @@ public class Controller {
                                 (m.invoke(objectOfGivenClass)).toString()+"\n");
 
 
+
                     } catch (Exception e){
                         e.printStackTrace();
                     }
                 });
 
+    }
+
+    boolean isNumericType(String type){
+
+        return type.equals(Float.class.getName())
+                || type.equals(Integer.class.getName())
+                || type.equals(BigDecimal.class.getName())
+                || type.equals(BigInteger.class.getName())
+                || type.equals(int.class.getName());
     }
 
 }
