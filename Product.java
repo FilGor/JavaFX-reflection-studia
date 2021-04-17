@@ -39,7 +39,7 @@ public class Product {
         this.price = price;
     }
 
-    public boolean isAvailableness() {
+    public boolean getAvailableness() {
         return availableness;
     }
 
