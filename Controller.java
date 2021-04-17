@@ -120,7 +120,6 @@ public class Controller {
                         System.out.println(m.getName().substring(3));
                         bottomTextArea.appendText(m.getName().substring(3)+" "+
                                 (m.invoke(objectOfGivenClass)).toString()+"\n");
-
                     } catch (Exception e){
                         e.printStackTrace();
                     }
@@ -136,7 +135,7 @@ try {
         numberProvidedByUser = BigDecimal.valueOf(Double.parseDouble(textToCast));
     }
 
-    ///////////
+    ///////////c
 
 
 }catch (NumberFormatException e){
