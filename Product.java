@@ -51,8 +51,7 @@ public class Product {
         this.textDescription = textDescription;
     }
 
-    public void setAvailableness(String availableness) {
-        this.availableness = availableness.equals("true") | availableness.equals("True");
-
+    public void setAvailableness(boolean availableness) {
+        this.availableness = availableness;
     }
 }
