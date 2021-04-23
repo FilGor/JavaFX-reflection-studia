@@ -61,22 +61,29 @@ public class Controller {
         paneForLabels.getChildren().clear();
         positionYOfLabelsAndInputs = -30;
 
-        Stream.of(classFields) // wygenerowanie nazw pól i input textu
-                .sorted(Comparator.comparing(Field::getName))
-                .forEach(e-> {
-                    Label label = new Label(e.getName());
+        Stream.of(classMethods)
+                .sorted(Comparator.comparing(Method::getName))
+                .filter(m->m.getName().matches("get.*"))
+                .forEach(method-> {
+                    //Wyświetlenie aktualnych wartości
+                    String valueOfGettedField = null;
+                    try {
+                         valueOfGettedField= method.invoke(objectOfGivenClass).toString();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    // wygenerowanie nazw pól i input textu
+                    String nameOfSettedField = method.getName().substring(3);
+                    Label label = new Label(nameOfSettedField);
                     TextInputControl textInput;
 
-                    if(e.getName().matches(".*text.*")){
-                        textInput = new TextArea();
-                        textInput.setMaxSize(200,20);
+                    if(method.getName().matches(".*text.*")){
+                        textInput = new TextArea(valueOfGettedField);
                     }else
                     {
-                        textInput = new TextField();
-                        textInput.setMaxSize(200,20);
-
+                        textInput = new TextField(valueOfGettedField);
                     }
-
+                    textInput.setMaxSize(200,20);
                     label.setTranslateY(positionYOfLabelsAndInputs+=50);
                     textInput.setTranslateY(positionYOfLabelsAndInputs);
                     paneForLabels.getChildren().add(label);
@@ -123,7 +130,7 @@ public class Controller {
                                         " i nie zostanie zmienione \n\n");
                             }
                         }else{
-                        m.invoke(objectOfGivenClass,actualtextField.getText());
+                            m.invoke(objectOfGivenClass,actualtextField.getText());
                         }
 
                     } catch (Exception e){
@@ -183,7 +190,6 @@ try {
                     try {
                         bottomTextArea.appendText("\n"+
                                 m.getName().substring(3) + " = " + m.invoke(objectOfGivenClass) +"\n" );
-
                     } catch (Exception e){
                         e.printStackTrace();
                     }

@@ -1,15 +1,12 @@
 package sample;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
-
 public class Product {
 
-    private String name;
-    private String category;
-    private Float price;
-    private boolean availableness;
-    private String textDescription;
+    private String name = "DefualtName";
+    private String category = "SomeCategory";
+    private Float price = Float.parseFloat("2.22");
+    private boolean availableness = false;
+    private String textDescription = "some random description";
 
 
     public Product() {

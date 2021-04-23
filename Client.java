@@ -1,13 +1,12 @@
 package sample;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 
 public class Client {
 
-    private String name;
-    private String surName;
-    private BigDecimal saldo;
+    private String name = "Client Name";
+    private String surName = " Client Surname";
+    private BigDecimal saldo = BigDecimal.valueOf(0.000);
 
 
 
